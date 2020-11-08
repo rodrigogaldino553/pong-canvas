@@ -75,6 +75,7 @@ function draw(){
     context.fillText("Player 2: "+ right.score, canvas.width - 150, 20)
 
     setTimeout(draw, 10)
+    setTimeout(draw, 20)
 }
 
 draw()
