@@ -2,23 +2,9 @@ var canvas = document.getElementById('canvas')
 var context = canvas.getContext("2d")
 
 
-let ballDirX = random(-1, 1)
-let ballDirY = random(-1, 1)
-let ballY = random(5, canvas.height - 5)
-
-if(ballDirX >= 0){
-    ballDirX = 1
-
-}else if(ballDirX <= 0){
-    ballDirX = -1
-}
-
-if(ballDirY >= 0){
-    ballDirY = 1
-
-}else if(ballDirY <= 0){
-    ballDirY = -1
-}
+let ballDirX = fixDirection(random(-1, 1))
+let ballDirY = fixDirection(random(-1, 1))
+let ballY = random(25, canvas.height - 25)
 
 
 var keys = {}
@@ -29,7 +15,7 @@ var ball = {
     width: 30,
     dirx: ballDirX,
     diry: ballDirY,
-    mod: 0,
+    mod: 2,
     speed: 2
 }
 
@@ -62,24 +48,35 @@ document.addEventListener("keyup", function (e) {
 })
 
 
+function fixDirection(dir){
+    if(dir >= 0){
+        return 1
+    
+    }else if(dir <= 0){
+        return -1
+
+    }
+}
+
+
 function random(min, max){
     return Math.random() * (max - min) + min
 }
 
 
 function moveBlock() {
-    if ('w' in keys && left.y > 0) {
+    if ('w' in keys && left.y > 10) {
         left.y -= left.speed
 
-    } else if ('s' in keys && left.y + left.height < canvas.height) {
+    } else if ('s' in keys && left.y + left.height < canvas.height - 10) {
         left.y += left.speed
 
     }
 
-    if ('ArrowUp' in keys && right.y > 0) {
+    if ('ArrowUp' in keys && right.y > 10) {
         right.y -= right.speed
 
-    } else if ('ArrowDown' in keys && right.y + right.height < canvas.height) {
+    } else if ('ArrowDown' in keys && right.y + right.height < canvas.height - 10) {
         right.y += right.speed
 
     }
@@ -89,11 +86,19 @@ function moveBlock() {
 function moveBall() {
     if (ball.y + ball.height >= left.y && ball.y <= left.y + left.height && ball.x <= left.x + left.width) {
         ball.dirx = 1
-        ball.mod += 0.2
+
+        if(ball.mod < 10){
+            ball.mod += 0.2
+
+        }
+        
 
     } else if (ball.y + ball.height >= right.y && ball.y <= right.y + right.height && ball.x + ball.width >= right.x) {
         ball.dirx = -1
-        ball.mod += 0.2
+        if(ball.mod < 10){
+            ball.mod += 0.2
+            
+        }
 
     }
 
@@ -128,9 +133,11 @@ function newGame(winner) {
     left.y = canvas.height / 2 - left.height / 2
     right.y = left.y
 
-    ball.y = canvas.height / 2 - ball.height / 2
+    ball.y = random(25, canvas.height - 25)//canvas.height / 2 - ball.height / 2
     ball.x = canvas.width / 2 - ball.width / 2
-    ball.mod = 0
+    ball.dirx = fixDirection(random(-1, 1))
+    ball.diry = fixDirection(random(-1, 1))
+    ball.mod = 2
 }
 
 
