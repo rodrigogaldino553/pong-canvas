@@ -1,6 +1,8 @@
 var canvas = document.getElementById('canvas')
 var context = canvas.getContext("2d")
 
+const hit = new Audio('/sounds/hit.wav')
+const wall = new Audio('/sounds/wall.wav')
 
 let ballDirX = fixDirection(random(-1, 1))
 let ballDirY = fixDirection(random(-1, 1))
@@ -85,8 +87,8 @@ function moveBlock() {
 
 function moveBall() {
     if (ball.y + ball.height >= left.y && ball.y <= left.y + left.height && ball.x <= left.x + left.width) {
+        hit.play()
         ball.dirx = 1
-
         if(ball.mod < 10){
             ball.mod += 0.2
 
@@ -94,6 +96,7 @@ function moveBall() {
         
 
     } else if (ball.y + ball.height >= right.y && ball.y <= right.y + right.height && ball.x + ball.width >= right.x) {
+        hit.play()
         ball.dirx = -1
         if(ball.mod < 10){
             ball.mod += 0.2
@@ -103,9 +106,11 @@ function moveBall() {
     }
 
     if (ball.y <= 0) {
+        wall.play()
         ball.diry = 1
 
     } else if (ball.y + ball.height >= canvas.height) {
+        wall.play()
         ball.diry = -1
 
     }
@@ -113,10 +118,14 @@ function moveBall() {
     ball.x += (ball.speed + ball.mod) * ball.dirx
     ball.y += (ball.speed + ball.mod) * ball.diry
 
+
+
     if (ball.x < left.x + left.width - 15) {// vai quebar aqui por conta do ball.mode q recebe 0.2, cacar uma maneira de resolver isso...
         newGame('Player 2')
+
     } else if (ball.x + ball.width > right.x + 15) {
         newGame('Player 1')
+
     }
 }
 
