@@ -3,6 +3,7 @@ var context = canvas.getContext("2d")
 
 const hit = new Audio('/sounds/hit.wav')
 const wall = new Audio('/sounds/wall.wav')
+const win = new Audio('/sounds/win.wav')
 
 let ballDirX = fixDirection(random(-1, 1))
 let ballDirY = fixDirection(random(-1, 1))
@@ -131,6 +132,7 @@ function moveBall() {
 
 
 function newGame(winner) {
+    win.play()
     if (winner == 'Player 1') {
         left.score++
 
