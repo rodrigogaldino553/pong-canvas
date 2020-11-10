@@ -1,3 +1,5 @@
+'use strict'
+
 var canvas = document.getElementById('canvas')
 var context = canvas.getContext("2d")
 
@@ -152,7 +154,7 @@ function draw() {
     context.fillText(" " + right.score, canvas.width - 180, 55)
 
     //draw half line
-    height = 5
+    let height = 5
     for (let c = 0; c < 14; c++) {
         context.fillRect((canvas.width / 2) - 5, height, 10, 20)
         height += 45
