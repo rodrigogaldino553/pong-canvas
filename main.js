@@ -1,9 +1,9 @@
 var canvas = document.getElementById('canvas')
 var context = canvas.getContext("2d")
 
-const hit = new Audio('/sounds/hit.wav')
-const wall = new Audio('/sounds/wall.wav')
-const win = new Audio('/sounds/win.wav')
+const hit = new Audio('./sounds/hit.wav')
+const wall = new Audio('./sounds/wall.wav')
+const win = new Audio('./sounds/win.wav')
 
 let ballDirX = fixDirection(random(-1, 1))
 let ballDirY = fixDirection(random(-1, 1))
