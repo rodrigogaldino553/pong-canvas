@@ -18,7 +18,7 @@ var ball = {
     width: 30,
     dirx: ballDirX,
     diry: ballDirY,
-    mod: 2,
+    mod: 1,
     speed: 2
 }
 
@@ -148,7 +148,7 @@ function newGame(winner) {
     ball.x = canvas.width / 2 - ball.width / 2
     ball.dirx = fixDirection(random(-1, 1))
     ball.diry = fixDirection(random(-1, 1))
-    ball.mod = 2
+    ball.mod = 1
 }
 
 
@@ -177,7 +177,7 @@ function draw() {
     }
 
 
-    setTimeout(draw, 20)
+    setTimeout(draw, 10)
 }
 
 draw()
