@@ -1,9 +1,12 @@
+body{
+    background: black;
+}
 #canvas{
     position: absolute;
     left: 50%;
     top: 50%;
-    margin-left: -300px;
+    margin-left: -25%;
     margin-top: -200px;
     background: black;
-    border: 1px solid black;
+    border: 10px solid white;
 }
