@@ -1,6 +1,7 @@
 body{
     background: black;
 }
+
 #canvas{
     position: absolute;
     left: 50%;
@@ -10,3 +11,9 @@ body{
     background: black;
     border: 10px solid white;
 }
+
+.commands .btn{
+    border: 3px solid white;
+}
+
+
