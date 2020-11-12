@@ -2,6 +2,9 @@ var canvas = document.getElementById('canvas')
 var context = canvas.getContext("2d")
 var norepeat = false
 
+const playBtn = document.querySelector('#play')
+const muteBtn = document.querySelector('#mute')
+
 var sound = true
 const hit = new Audio('sounds/hit.wav')
 const wall = new Audio('sounds/wall.wav')
@@ -187,10 +190,12 @@ function draw() {
 function play(){
     if(norepeat){
         norepeat = false
+        playBtn.innerHTML = 'Play'
         //jogo pausado
 
     }else{
         norepeat = true
+        playBtn.innerHTML = 'Pause'
         //despausado
 
     }
@@ -204,8 +209,10 @@ function play(){
 function mute(){
     if(sound){
         sound = false
+        muteBtn.innerHTML = 'Unmute'
     }else{
         sound = true
+        muteBtn.innerHTML = 'Mute'
     }
 
 }
