@@ -1,6 +1,11 @@
 var canvas = document.getElementById('canvas')
 var context = canvas.getContext("2d")
+var norepeat = false
 
+const playBtn = document.querySelector('#play')
+const muteBtn = document.querySelector('#mute')
+
+var sound = true
 const hit = new Audio('sounds/hit.wav')
 const wall = new Audio('sounds/wall.wav')
 const win = new Audio('sounds/win.wav')
@@ -88,7 +93,8 @@ function moveBlock() {
 
 function moveBall() {
     if (ball.y + ball.height >= left.y && ball.y <= left.y + left.height && ball.x <= left.x + left.width) {
-        hit.play()
+        sound ? hit.play() : null ;
+        
         ball.dirx = 1
         if(ball.mod < 10){
             ball.mod += 0.2
@@ -97,7 +103,7 @@ function moveBall() {
         
 
     } else if (ball.y + ball.height >= right.y && ball.y <= right.y + right.height && ball.x + ball.width >= right.x) {
-        hit.play()
+        sound ? hit.play() : null ;
         ball.dirx = -1
         if(ball.mod < 10){
             ball.mod += 0.2
@@ -107,11 +113,11 @@ function moveBall() {
     }
 
     if (ball.y <= 0) {
-        wall.play()
+        sound ? wall.play() : null ;
         ball.diry = 1
 
     } else if (ball.y + ball.height >= canvas.height) {
-        wall.play()
+        sound ? wall.play() : null ;
         ball.diry = -1
 
     }
@@ -132,7 +138,7 @@ function moveBall() {
 
 
 function newGame(winner) {
-    win.play()
+    sound ? win.play() : null ;
     if (winner == 'Player 1') {
         left.score++
 
@@ -177,10 +183,40 @@ function draw() {
     }
 
 
-    setTimeout(draw, 10)
+    norepeat ? setTimeout(draw, 10) : null ;
 }
 
+
+function play(){
+    if(norepeat){
+        norepeat = false
+        playBtn.innerHTML = 'Play'
+        //jogo pausado
+
+    }else{
+        norepeat = true
+        playBtn.innerHTML = 'Pause'
+        //despausado
+
+    }
+    
+    draw()
+
+
+}
+
+
+function mute(){
+    if(sound){
+        sound = false
+        muteBtn.innerHTML = 'Unmute'
+    }else{
+        sound = true
+        muteBtn.innerHTML = 'Mute'
+    }
+
+}
+
+
 draw()
-
-
 
